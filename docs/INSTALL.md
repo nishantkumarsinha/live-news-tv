@@ -45,7 +45,9 @@ adb install -r app/build/outputs/apk/prod/debug/app-prod-debug.apk
 
 Accept the debugging prompt on the TV the first time. The `prod` flavor reads the author's
 `/prod` list. The `stage` flavor is identical except that it reads `/test`, which is where
-the author tries changes first, so use `prod` unless you know you want `stage`.
+the author tries changes first. It installs as a separate app named Live News (India) Dev
+(`com.nishvik.livenews.dev`) with an orange DEV banner, so both can sit on one TV. Use `prod`
+unless you know you want `stage`.
 
 In Android Studio: open this folder, choose the `prodDebug` build variant, pick the TV as the
 target and press Run.
