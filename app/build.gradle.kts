@@ -35,6 +35,9 @@ android {
     productFlavors {
         create("stage") {
             dimension = "feed"
+            // Installs as a separate app (com.nishvik.livenews.dev, named "Live News (India) Dev"),
+            // so the dev and prod builds can sit on the same TV. Its banner and icon colour differ.
+            applicationIdSuffix = ".dev"
             buildConfigField("String", "FEED_URL", "\"https://livenewsindia.nishvik.com/test\"")
         }
         create("prod") {
