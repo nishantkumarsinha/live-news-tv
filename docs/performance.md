@@ -1,6 +1,6 @@
 # Performance notes
 
-Measured on a Xiaomi Mi Box 4 (1,987 MB RAM, Android TV) on 26 Oct 2026, 14:19 to 16:25 IST.
+Measured on a Xiaomi Mi Box 4 (1,987 MB RAM, Android TV) on 26 Oct 2026, 14:19 to 16:25 IST, using the debug build.
 This is one device and one run, so read it as a guide and not as a benchmark.
 
 ## How it was measured
@@ -15,7 +15,7 @@ retried, so the 500 moves are completed moves.
 
 | Measure | Result |
 |---|---|
-| APK size | 2.8 MB |
+| APK size | 0.25 MB release, 2.9 MB debug |
 | Third-party libraries | 0 |
 | App data on the TV | about 340 KB |
 | Memory at fresh start (PSS) | 33 MB |

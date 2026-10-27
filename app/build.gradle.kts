@@ -1,3 +1,4 @@
+import java.util.Properties
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -42,14 +43,33 @@ android {
         }
     }
 
+    // Release signing. The properties file path comes from livenews.keystoreProps (set in
+    // ~/.gradle/gradle.properties, outside the repo), else keystore.properties in the project root.
+    // Without a file the release build falls back to the debug key, so a fresh clone still builds.
+    val keystoreProps = Properties().apply {
+        val outside = (project.findProperty("livenews.keystoreProps") as String?)?.let { file(it) }
+        val f = outside ?: rootProject.file("keystore.properties")
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
+    signingConfigs {
+        if (keystoreProps.containsKey("storeFile")) {
+            create("release") {
+                storeFile = file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
-            // Sign with the debug key so the release APK installs directly with adb.
-            signingConfig = signingConfigs.getByName("debug")
+            // Real release key when keystore.properties exists, otherwise the debug key.
+            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
     buildFeatures {
