@@ -1,0 +1,17 @@
+# Live News (India) feed Worker. Committed with placeholders only.
+# Everything for this app in Cloudflare is named "livenewsindia":
+#   Worker livenewsindia-feed, KV namespace livenewsindia-feed, hostname livenewsindia.nishvik.com
+# Real deploy file lives outside the project (see the notes you were given), with the real KV namespace id.
+name = "livenewsindia-feed"
+main = "feed_worker.js"
+compatibility_date = "2025-09-01"
+
+[[kv_namespaces]]
+binding = "FEED"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Serves the whole hostname from this Worker. Wrangler creates the DNS record and certificate.
+# Needs nishvik.com to be a zone on this Cloudflare account and no existing DNS record named "livenewsindia".
+[[routes]]
+pattern = "livenewsindia.nishvik.com"
+custom_domain = true

@@ -1,0 +1,30 @@
+# Build output and IDE
+*.iml
+.gradle/
+.kotlin/
+.idea/
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+*.hprof
+
+# Local machine settings and anything secret. Never commit these.
+local.properties
+config.json
+.env
+.env.*
+*.keystore
+*.jks
+keystore.properties
+wrangler.local.toml
+.wrangler/
+node_modules/
+
+# macOS, logs, scratch
+.DS_Store
+*.log
+__pycache__/
