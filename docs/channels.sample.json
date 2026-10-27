@@ -1,0 +1,50 @@
+{
+  "updated_epoch": 1790000000,
+  "updated": "21 Sep 12:00 IST",
+  "contact": "Contact the app maintainer",
+  "weather": {
+    "temp": 26,
+    "desc": "Partly cloudy",
+    "icon": "cloud",
+    "day": 1,
+    "ts": 1790000000,
+    "city": "Sample City"
+  },
+  "channels": [
+    {
+      "group": "hindi",
+      "name": "Sample Hindi News",
+      "id": "AAAAAAAAAAA",
+      "watching": 12000,
+      "since": 1700000000,
+      "icon": "sample_hindi_news.jpg",
+      "region": "",
+      "news_src": "example.com",
+      "news": [
+        { "t": "Sample headline one", "d": "A short description under the headline.", "ts": 1789990000 },
+        { "t": "Sample headline two", "d": "", "ts": 1789980000 }
+      ]
+    },
+    {
+      "group": "world",
+      "name": "Sample World News",
+      "region": "UK",
+      "id": "BBBBBBBBBBB",
+      "watching": 4300,
+      "since": 1690000000,
+      "icon": "sample_world_news.jpg",
+      "news_src": "example.org",
+      "news": [
+        { "t": "Sample world headline", "d": "Another short description.", "ts": 1789985000 }
+      ]
+    },
+    {
+      "group": "business",
+      "name": "Sample Business Channel",
+      "id": "",
+      "watching": 0,
+      "icon": "sample_business.jpg",
+      "news": []
+    }
+  ]
+}

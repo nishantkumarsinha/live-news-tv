@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Lets the app download the channel list from the web feed. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Lets the app notice when the TV has no internet. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Lets the app check that the YouTube TV app is installed. -->
+    <queries>
+        <package android:name="com.google.android.youtube.tv" />
+    </queries>
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:banner="@drawable/banner"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LiveNews">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

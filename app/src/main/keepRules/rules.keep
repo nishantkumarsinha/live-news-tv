@@ -1,0 +1,4 @@
+# Live News R8 rules.
+# Shrink unused code, but do not rename or repackage classes: renaming Kotlin
+# library classes caused an IllegalAccessError crash on Android 9.
+-dontobfuscate

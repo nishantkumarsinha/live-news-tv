@@ -1,0 +1,34 @@
+# Approved files for the public repo. repo_guard_latest.py refuses any file not listed here.
+# One path per line. A trailing / approves a whole folder. Lines starting with # are comments.
+# To add a file on purpose:  python3 scripts/repo_guard_latest.py approve public
+# Changing this list is a deliberate act: review it in the diff before you commit.
+.githooks/approved-public.txt
+.githooks/pre-commit
+.gitignore
+LICENSE
+NOTICE.md
+README.md
+app/.gitignore
+app/build.gradle.kts
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/nishvik/livenews/FeedSync.kt
+app/src/main/java/com/nishvik/livenews/MainActivity.kt
+app/src/main/keepRules/rules.keep
+app/src/main/res/
+build.gradle.kts
+cloudflare/feed_worker.js
+cloudflare/wrangler.toml
+docs/INSTALL.md
+docs/channels.sample.json
+docs/feed.md
+docs/performance.md
+docs/screenshots/
+gradle.properties
+gradle/gradle-daemon-jvm.properties
+gradle/libs.versions.toml
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+licenses/OFL-Sora.txt
+settings.gradle.kts
