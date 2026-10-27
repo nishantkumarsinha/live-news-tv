@@ -57,17 +57,17 @@ This is meant to run on a living-room TV every day, so the small things are hand
 | App updates its own list | The TV checks the feed at most every 5 minutes. Only a changed list is downloaded (ETag), logos are fetched first, and the file is written atomically. |
 | Failures do not break the screen | If a download fails, the list already on the TV stays in use. A list older than 3 hours shows a warning. |
 | Edge cases | YouTube TV not installed, no internet, a channel not live, and no headlines available all have their own message. |
-| Small and light | 2.8 MB APK, no third-party libraries, 33 MB of memory at start. |
+| Small and light | 0.25 MB release APK (2.9 MB debug build), no third-party libraries, 33 MB of memory at start. |
 | Memory tested | 500 automated reorders on a 2 GB TV with a flat memory trend, see below. |
 | Low server cost | Cloudflare Workers KV with a 60 second edge cache, writes batched to stay inside the free plan. |
 
 ## Measured
 
-Xiaomi Mi Box 4, 26 Oct 2026. Details and method in [docs/performance.md](docs/performance.md).
+Xiaomi Mi Box 4, 26 Oct 2026, debug build. Details and method in [docs/performance.md](docs/performance.md).
 
 | Measure | Result |
 |---|---|
-| APK size | 2.8 MB |
+| APK size | 0.25 MB release, 2.9 MB debug |
 | Third-party libraries | 0 |
 | Memory at fresh start | 33 MB |
 | Memory during 500 reorders | median 60 MB, peak 72 MB, flat trend |
