@@ -118,6 +118,7 @@ class MainActivity : Activity() {
     private val handler = Handler(Looper.getMainLooper())
 
     private var topSlot: FrameLayout? = null
+    private var rowsBox: LinearLayout? = null
     private var themePill: View? = null
     private var themeDialog: Dialog? = null
     private var panel: LinearLayout? = null
@@ -702,6 +703,7 @@ class MainActivity : Activity() {
         rowHolders.clear()
         rowBoxes.clear()
         shownKeys.clear()
+        rowsBox = null
         pv = null
         panel = null
         topSlot = null
@@ -858,6 +860,7 @@ class MainActivity : Activity() {
         rowHolders.clear()
         rowBoxes.clear()
         shownKeys.clear()
+        rowsBox = null
         pulse?.cancel()
         pulse = null
         moving = null
@@ -894,6 +897,7 @@ class MainActivity : Activity() {
                 orientation = LinearLayout.VERTICAL
                 clipChildren = false
             }
+            rowsBox = left
             rows.forEachIndexed { i, row ->
                 if (i > 0) left.addView(Space(this), ll(1, 0, 1f))
                 left.addView(rowView(row, tw) { tile, holder ->
@@ -1393,7 +1397,50 @@ class MainActivity : Activity() {
         pulse?.cancel()
         pulse = null
         moving = null
-        render()
+        applyOrderInPlace()
+    }
+
+    /**
+     * After a move the rows are already shown in their new places (by translation). Put the same row views in that
+     * order in their container and clear the move styling. Building the whole screen again here created about 500
+     * new views for every finished move, and the old ones waited for the garbage collector (that was the memory
+     * saw-tooth seen in the memory test). Falls back to the full rebuild if anything looks unexpected.
+     */
+    private fun applyOrderInPlace() {
+        val box = rowsBox
+        val byKey = rowHolders.associateBy { it.key }
+        val order = visual.toList()
+        if (box == null || order.size != rowHolders.size || order.any { it !in byKey }) {
+            render()
+            return
+        }
+        val keep = currentFocus
+        val ac = th.accent
+        box.removeAllViews()
+        rowHolders.clear()
+        rowBoxes.clear()
+        shownKeys.clear()
+        order.forEachIndexed { i, k ->
+            val h = byKey.getValue(k)
+            h.box.animate().cancel()
+            h.box.translationY = 0f
+            h.box.translationZ = 0f
+            h.handle.animate().cancel()
+            h.handle.alpha = 0f
+            h.handle.scaleX = 1f
+            h.handle.scaleY = 1f
+            (h.band.background as? GradientDrawable)?.apply {
+                setColor(Color.argb(0x2B, Color.red(ac), Color.green(ac), Color.blue(ac)))
+                setStroke(maxOf(1, px(1f)), Color.argb(0x4D, Color.red(ac), Color.green(ac), Color.blue(ac)))
+            }
+            if (i > 0) box.addView(Space(this), ll(1, 0, 1f))
+            box.addView(h.box, ll(ViewGroup.LayoutParams.MATCH_PARENT, px(ROW_H)))
+            rowHolders.add(h)
+            rowBoxes.add(h.box)
+            shownKeys.add(k)
+        }
+        keep?.requestFocus()
+        applyEmphasis()
     }
 
     private var tileBeforePill: View? = null

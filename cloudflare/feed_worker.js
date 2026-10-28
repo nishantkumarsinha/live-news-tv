@@ -1,6 +1,7 @@
 // Cloudflare Worker: serves the Live News feed from a KV namespace bound as FEED.
 //   GET /test/channels.json   GET /prod/channels.json   GET /icons/<name>.jpg
 // The push script writes these keys with the Cloudflare API. The TV app only reads them.
+// Short install links /get and /livenews send people to the release APK (302). Update APK_URL for a new version.
 // Public read, no keys in the app. Anything else is a 404.
 
 const CORS = {
@@ -9,6 +10,9 @@ const CORS = {
   "Access-Control-Allow-Headers": "If-None-Match",
   "Access-Control-Expose-Headers": "ETag",
 };
+
+const APK_URL = "https://github.com/nishantkumarsinha/live-news-tv/releases/download/v1.0/LiveNewsIndia-v1.0.apk";
+const SHORT_LINKS = new Set(["get", "livenews"]);
 
 const JSON_RE = /^(test|prod)\/channels\.json$/;
 const ICON_RE = /^icons\/[a-z0-9_]+\.jpg$/;
@@ -30,6 +34,9 @@ export default {
       key = decodeURIComponent(new URL(request.url).pathname).replace(/^\/+/, "");
     } catch (e) {
       return plain(400, "Bad request");
+    }
+    if (SHORT_LINKS.has(key.toLowerCase().replace(/\/+$/, ""))) {
+      return new Response(null, { status: 302, headers: { ...CORS, "Location": APK_URL, "Cache-Control": "no-store" } });
     }
     const isJson = JSON_RE.test(key);
     if (!isJson && !ICON_RE.test(key)) return plain(404, "Not found");
