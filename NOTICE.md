@@ -26,3 +26,11 @@ YouTube, Android, Android TV and Google are trademarks of Google LLC. This proje
 independent. It is not affiliated with, endorsed by or sponsored by YouTube, Google, or
 any of the news channels it lists. It only opens public live streams in the official
 YouTube TV app.
+
+## Takedown
+
+If you own a name, icon or content shown by this project and want it changed or removed, open an issue on this repository and it will be handled promptly.
+
+## Privacy
+
+The app has no accounts and no analytics. It stores only your row order and the channel list on your own device. It fetches the weather, the channel list and headlines over the internet and sends no personal data.
