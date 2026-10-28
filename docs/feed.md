@@ -46,9 +46,9 @@ Check `npx wrangler kv key put --help` for your version.
 | Path | Content |
 |---|---|
 | `/test/channels.json` and `/prod/channels.json` | The channel list. Two folders so a test TV can run ahead of the production TV. |
-| `/icons/<name>.jpg` | One logo per channel. Name uses lowercase letters, digits and underscores. Each file is read up to 300 KB. |
+| `/icons/<name>.jpg` | One icon per channel (an illustration or your own image). Name uses lowercase letters, digits and underscores. Each file is read up to 300 KB. |
 
-Anything else returns 404. Reads are public, so the app needs no key. The Worker adds an
+Anything else returns 404. In the Worker in this repository, reads are open. The author's own feed is locked with a Cloudflare WAF rule that blocks any request without a private `X-Feed-Key` header, so it only answers the author's builds. You can do the same for yours: build from source with `feedKey` set in a local keystore.properties file, and add a WAF rule that blocks requests lacking that header. The Worker adds an
 ETag, so an unchanged list costs a tiny 304 reply, and caches at the edge for 60 seconds.
 
 ## What the app does with the feed

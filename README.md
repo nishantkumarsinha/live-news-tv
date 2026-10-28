@@ -54,7 +54,7 @@ This is meant to run on a living-room TV every day, so the small things are hand
 |---|---|
 | Stream links are never fixed | A scheduled job re-checks every channel each hour. When a channel has several live streams it keeps those with at least 20 percent of the top viewer count (at most 4), picks the oldest, and falls back to the most viewed. Manual overrides are possible. |
 | Viewer counts and headlines are live | Counts, start times and headlines are refreshed on a schedule, not typed in. |
-| App updates its own list | The TV checks the feed at most every 5 minutes. Only a changed list is downloaded (ETag), logos are fetched first, and the file is written atomically. |
+| App updates its own list | The TV checks the feed at most every 5 minutes. Only a changed list is downloaded (ETag), icons are fetched first, and the file is written atomically. |
 | Failures do not break the screen | If a download fails, the list already on the TV stays in use. A list older than 3 hours shows a warning. |
 | Edge cases | YouTube TV not installed, no internet, a channel not live, and no headlines available all have their own message. |
 | Small and light | 0.25 MB release APK (2.9 MB debug build), no third-party libraries, 33 MB of memory at start. |
@@ -86,6 +86,10 @@ Xiaomi Mi Box 4, 26 Oct 2026, debug build. Details and method in [docs/performan
 The app never knows how the file was made, so you can also write `channels.json` by hand and push
 it with adb. The collector itself is kept in a separate private repository. This repository has
 everything needed to build the app and serve your own feed. See [docs/feed.md](docs/feed.md).
+
+## Download
+
+The [releases page](https://github.com/nishantkumarsinha/live-news-tv/releases/latest) has a developer build. It is not a ready to use app. The author's feed is private, so you need your own feed, see [docs/feed.md](docs/feed.md).
 
 ## Build and install
 
