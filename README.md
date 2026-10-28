@@ -97,8 +97,8 @@ adb connect <tv-ip>:5555
 adb install -r app/build/outputs/apk/prod/debug/app-prod-debug.apk
 ```
 
-By default the app reads the channel list from the author's public feed. If you would rather
-use your own, change one line in `app/build.gradle.kts` or push the files with adb. Both routes are
+The author's feed is private and only answers the author's own builds. To run the app, use your
+own feed: change one line in `app/build.gradle.kts` or push the files with adb. Both routes are
 explained in [docs/feed.md](docs/feed.md).
 
 ## Repository layout

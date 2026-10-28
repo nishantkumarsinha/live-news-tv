@@ -12,6 +12,14 @@ val stamp: String = (project.findProperty("stamp") as String?)
     ?: ZonedDateTime.now(ZoneId.of("Asia/Kolkata"))
         .format(DateTimeFormatter.ofPattern("yyyy.MM.dd.HH.mm"))
 
+// Local-only settings file (keystore.properties, kept outside the repo). It also holds feedKey, the access key
+// the app sends to the feed. Without the file everything still builds, with an empty key.
+val keystoreProps = Properties().apply {
+    val outside = (project.findProperty("livenews.keystoreProps") as String?)?.let { file(it) }
+    val f = outside ?: rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+
 android {
     namespace = "com.nishvik.livenews"
     compileSdk {
@@ -25,6 +33,7 @@ android {
         versionCode = 2
         versionName = stamp
         buildConfigField("String", "BUILD_STAMP", "\"$stamp\"")
+        buildConfigField("String", "FEED_KEY", "\"${keystoreProps.getProperty("feedKey", "")}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,11 +58,6 @@ android {
     // Release signing. The properties file path comes from livenews.keystoreProps (set in
     // ~/.gradle/gradle.properties, outside the repo), else keystore.properties in the project root.
     // Without a file the release build falls back to the debug key, so a fresh clone still builds.
-    val keystoreProps = Properties().apply {
-        val outside = (project.findProperty("livenews.keystoreProps") as String?)?.let { file(it) }
-        val f = outside ?: rootProject.file("keystore.properties")
-        if (f.exists()) f.inputStream().use { load(it) }
-    }
     signingConfigs {
         if (keystoreProps.containsKey("storeFile")) {
             create("release") {

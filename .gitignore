@@ -28,3 +28,8 @@ node_modules/
 .DS_Store
 *.log
 __pycache__/
+
+# Channel logos never go in this repo
+icons/
+real_icons/
+_real_logos*/

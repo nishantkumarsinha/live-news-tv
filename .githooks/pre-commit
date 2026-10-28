@@ -3,7 +3,7 @@
 # Blocks commits that stage secret-type files or text that looks like a key, a private address or a home path.
 bad_files=$(git diff --cached --name-only | grep -E '(^|/)(config\.json|wrangler\.local\.toml|keystore\.properties|local\.properties|\.env[^/]*)$|\.(jks|keystore|pem|p12)$')
 if [ -n "$bad_files" ]; then echo "Blocked: secret-type file staged:"; echo "$bad_files"; exit 1; fi
-if git diff --cached -U0 -- . ':!.githooks' | grep -E '^\+' | grep -qE 'cfut_[A-Za-z0-9]{20,}|cfat_[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|192\.168\.[0-9]+\.[0-9]+|/Users/[A-Za-z0-9_.-]+/'; then
+if git diff --cached -U0 -- . ':!.githooks' | grep -E '^\+' | grep -qE 'cfut_[A-Za-z0-9]{20,}|cfat_[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|feedKey[[:space:]]*=[[:space:]]*[A-Za-z0-9]{6,}|192\.168\.[0-9]+\.[0-9]+|/Users/[A-Za-z0-9_.-]+/'; then
   echo "Blocked: staged changes contain a key, a private network address or a home folder path."; exit 1
 fi
 # Only files listed in .githooks/approved-public.txt may be committed. The guard script lives in the

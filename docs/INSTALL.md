@@ -26,12 +26,11 @@ cd live-news-tv
 
 ## 3. Choose where the channel list comes from
 
-**Route A, the default: use the author's feed.** Nothing to change. The app downloads the
-channel list and logos from a public address (`livenewsindia.nishvik.com`). No key is needed.
-This feed is run by the author on a best-effort basis and can change or stop. If it does, the
-app keeps showing the last list it downloaded and then shows a "List not updated" warning.
+**Route A, the author's feed (private).** The author's feed is not open to the public. It only
+answers apps that carry a private access key, and the published source and APK do not contain
+that key. If you want access, ask the author.
 
-**Route B, your own list.** Change `FEED_URL` in `app/build.gradle.kts`, or set it to an empty
+**Route B, your own list (the normal route).** Change `FEED_URL` in `app/build.gradle.kts`, or set it to an empty
 string and push the files with adb. [feed.md](feed.md) explains both, including how to host the
 list on your own Cloudflare account.
 

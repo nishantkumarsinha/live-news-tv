@@ -16,9 +16,9 @@ repository). It must stay with any copy of the font.
   The free API is for non-commercial use. See https://open-meteo.com/en/terms
 - Headlines are read from public RSS feeds and Google News at run time, and each
   headline is shown with its source name. No headlines are stored in this repository.
-- Channel names and logos belong to their owners. Logos are downloaded at run time and
-  are not stored in this repository. The screenshots in `docs/screenshots/` show them
-  only to demonstrate the app.
+- Channel names belong to their owners. This repository contains no channel logos. The
+  author's feed serves original illustrated icons, not official logos. The screenshots in
+  `docs/screenshots/` have the icons blurred.
 
 ## Trademarks
 

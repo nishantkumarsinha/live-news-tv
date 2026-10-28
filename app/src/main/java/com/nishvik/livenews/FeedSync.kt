@@ -91,6 +91,7 @@ internal class FeedSync(private val dir: File, private val base: String) {
             c.connectTimeout = 8_000
             c.readTimeout = 15_000
             c.useCaches = false
+            if (BuildConfig.FEED_KEY.isNotEmpty()) c.setRequestProperty("X-Feed-Key", BuildConfig.FEED_KEY)
             if (tagged) etags[path]?.let { c.setRequestProperty("If-None-Match", it) }
             val code = c.responseCode
             if (code != 200) {
