@@ -35,3 +35,4 @@ settings.gradle.kts
 app/src/stage/res/drawable-xhdpi/banner.png
 app/src/stage/res/drawable/ic_launcher_background.xml
 app/src/stage/res/values/strings.xml
+SECURITY.md
